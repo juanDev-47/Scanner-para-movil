@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.carnetizacion_alcaldia.CarnetizacionBD;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -22,6 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -53,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             builder.setMessage("Se lee la cedula:  " + dato);
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
-
         }
+
 
     }
 
@@ -81,33 +86,44 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     //metodo para consultar la cedula en la base de datos
     private void Busqueda() {
-        CarnetizacionBD admin = new CarnetizacionBD(this, "administracion", null, 1);
+        CarnetizacionBD admin = new CarnetizacionBD(this, "administracion1", null, 1);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
         String cedu = txtCedula.getText().toString();
+
+        SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        Date date = new Date();
+        String fecha = dataFormat.format(date);
 
         if (!cedu.isEmpty()) {
             Cursor fila = BaseDeDatos.rawQuery("SELECT Nombre,Apellidos,Fecha,Hora FROM Citas WHERE Cedula =" + cedu, null);
             if(fila.moveToFirst()){
                 String nombre = fila.getString(0);
                 String apellidos = fila.getString(1);
-                String fecha = fila.getString(2);
+                String fecha1 = fila.getString(2);
                 String hora = fila.getString(3);
                 txtNombre.setText(fila.getString(0));
                 txtApellido.setText(fila.getString(1));
                 txtFecha.setText(fila.getString(2));
                 txtHora.setText(fila.getString(3));
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Resultado de la consulta:");
-                builder.setMessage("El usuario: " + nombre + " "+ apellidos + " identificado con cedula: " + cedu + " tiene cita para generar carné" +
-                        " el dia " +fecha+ " a las " + hora + " AM");
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-                BaseDeDatos.close();
+                if(fecha1.equals(fecha)){
+                    builder.setTitle("Información");
+                    builder.setMessage("El usuario: " + nombre + " "+ apellidos + " identificado con cedula: " + cedu + " tiene cita para generar carné" +
+                            " el dia de hoy" +fecha1+ " a las " + hora + " AM");
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }else {
+                    builder.setTitle("Información");
+                    builder.setMessage("El usuario: " + nombre + " " + apellidos + " identificado con cedula: " + cedu + " no tiene cita para generar carné" +
+                            " el dia de hoy " + fecha + " la fecha de su cita es el dia " + fecha1 + " a las " + hora + " AM");
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
                 BaseDeDatos.close();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Resultado de la consulta");
-                builder.setMessage("Se ha presentado un error, la cedula: " + dato + " no existe en la base de datos actual ó no tiene agendada cita para " +
+                builder.setMessage("Se ha presentado un error, la cedula: " + cedu + " no existe en la base de datos actual ó no tiene agendada cita para " +
                         "solicitar el carné, debe registrarse primero");
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
@@ -120,19 +136,27 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     }
 
     private void insertar(View view){ // metodo para insertar en la base de datos empleando un boton y sensando los campos
-        CarnetizacionBD admin = new CarnetizacionBD(this, "administracion", null, 1);
+        CarnetizacionBD admin = new CarnetizacionBD(this, "administracion1", null, 1);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
 
-        // se crean las variables que van a tener los valores de los Plaintext del formulario
+        String cedula = txtCedula.getText().toString();
+        String nombre = txtNombre.getText().toString();
+        String apellido = txtApellido.getText().toString();
+        String fecha = txtFecha.getText().toString();
+        String hora = txtHora.getText().toString();
 
-        //se crea el if para validar que las variables esten llenas todas eje: (!var1.esEmpty() && !var2.esEmpty() ...)
-        // si estan llenas todas las variables se instancia un objeto de la clase ContentValues y se usa el metodo put eje: objeto.put("var", var)
-        // el primer parametro hace alucion a la columna de la base de datos y el otro parametro es el valor que vamos a insertar y asi con cada variable
+        if(!cedula.isEmpty() && !nombre.isEmpty() && !apellido.isEmpty() && !fecha.isEmpty() && !hora.isEmpty()){
 
-        // luego se emplea el objeto de la base de datos eje: BaseDeDatos.insert(table: "Citas", null, nombre del objeto ContentValues);
-        //luego se cierra BaseDeDatos.close();
-        //luego se setean los campos del formulario eje: var.setText("");
-        //finalmente hacemos uso del else para mostrar un toast y decir que algun dato no esta en el formulario
+        } else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Cuidado");
+            builder.setMessage("Todos los campos deben estas llenos");
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            BaseDeDatos.close();
+        }
+
+
     }
 
 

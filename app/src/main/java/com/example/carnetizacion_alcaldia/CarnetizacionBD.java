@@ -20,7 +20,11 @@ public class CarnetizacionBD extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase BaseDeDatos) {
         BaseDeDatos.execSQL("CREATE TABLE Citas ( id int primary key, Cedula text, Nombre text, Apellidos text, Fecha text, Hora text)");
-        BaseDeDatos.execSQL("INSERT INTO Citas (Cedula,Nombre,Apellidos,Fecha,Hora ) VALUES ('1037633965','Juan Pablo', 'Arenas Velez', '21-12-2020', '11:30:00')");
+        BaseDeDatos.execSQL("INSERT INTO Citas (Cedula,Nombre,Apellidos,Fecha,Hora ) VALUES ('1037633965','Juan Pablo', 'Arenas Velez', '13-11-2020', '11:30:00')");
+        BaseDeDatos.execSQL("INSERT INTO Citas (Cedula,Nombre,Apellidos,Fecha,Hora ) VALUES ('1017229224','Francisco Javier', 'Silva Cadavid', '30-11-2020', '12:30:00')");
+        BaseDeDatos.execSQL("INSERT INTO Citas (Cedula,Nombre,Apellidos,Fecha,Hora ) VALUES ('1001368569','Santiago', 'Valencia Marulanda', '04-12-2020', '01:30:00')");
+        BaseDeDatos.execSQL("INSERT INTO Citas (Cedula,Nombre,Apellidos,Fecha,Hora ) VALUES ('1007241215','Felipe', 'Gonzalez Diaz', '11-12-2020', '03:00:00')");
+        BaseDeDatos.execSQL("INSERT INTO Citas (Cedula,Nombre,Apellidos,Fecha,Hora ) VALUES ('71375739','Andres Felipe', 'Graciano Monsalve', '25-12-2020', '12:30:00')");
     }
 
     @Override

@@ -36,8 +36,6 @@ public class SegundoActivity extends AppCompatActivity implements ZXingScannerVi
         Log.v("HandleResult",result.getText());
         Log.v("result", result.getBarcodeFormat().toString());
         mensaje = result.getText();
-        //AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //builder.setTitle("Resultado del scanner");
         men = mensaje.substring(48,58);
         resultado = manejoCaracteres(men);  // metodo retorna el numero de la cedula ya formateada en la variable resultado
         anterior.putExtra("dato", resultado);

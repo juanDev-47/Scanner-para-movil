@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A4C3DE"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btnScanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         android:onClick="btn"
         android:text="Usar Escaner"
+        android:textColor="#070707"
+        app:backgroundTint="#EDBC5E"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,83 +23,96 @@
     <EditText
         android:id="@+id/txt_cedula"
         android:layout_width="350dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Cedula"
         android:inputType="textPersonName"
+        android:textColor="#100F0F"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_nombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnScanner"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <EditText
         android:id="@+id/txt_nombre"
         android:layout_width="351dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textPersonName"
+        android:textColor="#121111"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_apellido"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_cedula" />
 
     <EditText
         android:id="@+id/txt_fecha"
         android:layout_width="353dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Fecha"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/txt_hora"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.413"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_apellido" />
 
     <EditText
         android:id="@+id/txt_apellido"
-        android:layout_width="353dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="348dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Apellido"
         android:inputType="textPersonName"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_fecha"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_nombre" />
 
     <EditText
         android:id="@+id/txt_hora"
         android:layout_width="348dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Hora"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/btn_buscar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_fecha" />
 
     <Button
         android:id="@+id/btn_buscar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="16dp"
         android:onClick="buscarCedula"
         android:text="Buscar Documento"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#070707"
+        app:backgroundTint="#EDBC5E"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_hora" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="173dp"
+        android:layout_height="134dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnScanner"
+        app:srcCompat="@drawable/carnetizacion_alcaldia" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
